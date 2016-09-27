@@ -7,8 +7,13 @@ class PeriodicReedSwitchRead(threading.Thread):
 		self.interval = interval
 		self.daemon = True
 		self.gpioUtil = gpioUtil
+		self.openedSwitchState = 0
+		self.closedSwitchState = 0
 		
 
 	def run(self):
-		self.gpioUtil.readOpenCloseSwitchPins()
+		self.openedSwitchState, self.closedSwitchState = self.gpioUtil.readOpenCloseSwitchPins()
 		threading.Timer(self.interval, self.run).start()
+
+	def getSwitchState(self):
+		return (self.openedSwitchState, self.closedSwitchState)
