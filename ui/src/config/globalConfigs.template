@@ -1,3 +1,3 @@
-globalConfigs = {
+window.globalConfigs = {
 	server: ''
-}
+};
