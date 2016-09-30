@@ -15,16 +15,12 @@ config.read('properties.ini')
 util = GPIOUtils(config)
 util.init()
 
-switchRead = PeriodicReedSwitchRead(float(config['general']['REED_SWITCH_PIN_CHECK_INTERVAL']), util)
-print "switch: " + str(switchRead.getSwitchState())
-switchRead.start()
-
-
 @app.route('/garage-door-control/api/v1/status', methods=['GET'])
 @crossdomain(origin='*')
 def status():
 	try:
-		return jsonify(switchRead.getSwitchState())
+		closedSwitchStatus, openedSwitchStatus = util.getSwitchState()
+		return jsonify(closedSwitchStatus=closedSwitchStatus, openedSwitchStatus=openedSwitchStatus)
 	except TypeError as e:
 		print str(e)
 
