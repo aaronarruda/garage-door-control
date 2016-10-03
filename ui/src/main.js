@@ -24,7 +24,7 @@ var Enclosure = React.createClass({
 
 	getInitialState: function() {
 		return {
-			closed: true,
+			closed: false,
 			opened: false,
 			key: 1, 
 			url: imageSrcUrl,
@@ -48,10 +48,9 @@ var Enclosure = React.createClass({
 			cache: false,
 			timeout: 5000,
 			success: function(data) {
+
 				var fullyClosed = false;
 				var fullyOpen = false;
-				var alerts = this.state.alerts;
-
 
 				// CLOSED means the reed switch is being actuated (the actuator is close to the sensor)
 				if (data.closedSwitchStatus === "CLOSED") {
@@ -64,16 +63,20 @@ var Enclosure = React.createClass({
 				var sensorMalfunction = false;
 				if ((fullyOpen && fullyClosed)) {
 					sensorMalfunction = true;
+				} else {
+					sensorMalfunction = false;
 				}
+
 				this.setState({
 					closed: fullyClosed,
 					opened: fullyOpen,
-					alertSensorMalfunction: sensorMalfunction
+					alertSensorMalfunction: sensorMalfunction,
+					alertApiStatusError: false
 				});
 
 			}.bind(this),
 			error: function() {
-				this.setState({alertApiError: true});
+				this.setState({alertApiStatusError: true});
 			}.bind(this)
 		});
 	},
@@ -83,8 +86,11 @@ var Enclosure = React.createClass({
 			url: apiUrl + "toggle",
 			type: 'POST',
 			timeout: 5000,
+			success: function(data) {
+				this.setState({alertApiToggleError: false});
+			},
 			error: function(xhr, status, err) {
-				this.setState({alertApiError: true});
+				this.setState({alertApiToggleError: true});
 			}.bind(this)
 		});
 	},
@@ -98,7 +104,7 @@ var Enclosure = React.createClass({
 
 		var renderSensorMalfunctionAlert = function() {
 			if (self.state.alertSensorMalfunction) {
-				return (<li>Garage sensor malfunction.  Both states have been detected.</li>);
+				return (<li>Garage door sensor malfunction.  Both states have been detected.</li>);
 			}
 		};
 
@@ -110,7 +116,7 @@ var Enclosure = React.createClass({
 
 		var renderApiToggleAlert = function() {
 			if (self.state.alertApiToggleError) {
-				return (<li>Error toggling garage remote transmission.</li>);
+				return (<li>Cannot toggle garage remote transmission.</li>);
 			}
 		};
 
@@ -118,9 +124,11 @@ var Enclosure = React.createClass({
 			return (
 				<Alert bsStyle="danger">
 					<h4>There's a problem!</h4>
+					<br />
 					<ul>
 					{renderSensorMalfunctionAlert()}
 					{renderApiStatusAlert()}
+					{renderApiToggleAlert()}
 					</ul>
 					<br />
 					<p>You can still attempt to toggle the garage door, though it isn't guaranteed to work.</p>
@@ -168,7 +176,7 @@ var Enclosure = React.createClass({
 			<div className="container-fluid" ref="parentContainer">				
 				<div className="row">
 					<div className="col-sm-4">
-						<PageHeader>Garage Control</PageHeader>
+						<PageHeader>Garage Door Control</PageHeader>
 						{this.renderAlert()}
 						<Grid>
 							<Row>
