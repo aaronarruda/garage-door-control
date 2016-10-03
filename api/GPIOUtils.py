@@ -16,6 +16,7 @@ class GPIOUtils():
 		GPIO.setwarnings(True)
 		GPIO.setmode(GPIO.BOARD)
 		GPIO.setup(self.remotePin, GPIO.OUT)
+		GPIO.output(self.remotePin, GPIO.HIGH) # Make sure relay is off when we start up
 		GPIO.setup(self.closedReedSwitchPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 		GPIO.setup(self.openedReedSwitchPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 		# set current state of switches
