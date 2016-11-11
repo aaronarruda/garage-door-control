@@ -1,5 +1,11 @@
-sudo apt-get install python-pip
+sudo apt-get update
 
+sudo apt-get install -y git
+sudo apt-get install -y npm
+sudo npm install gulp -g
+sudo ln -s /usr/bin/nodejs /usr/bin/node
+
+sudo apt-get install python-pip
 sudo pip install flask tornado configparser
 
 # TODO:
@@ -8,7 +14,22 @@ sudo pip install flask tornado configparser
 # Add the following to nginx config file (/etc/nginx/sites-enabled/rpicam)
 # This makes available the live preview outside of the authentication
 # necessary for the RPi-Cam-Web-Interface management interface
+# and runs the garage-door-control interface.  Change the PIi-Cam to run 
+# on port 8080.
 
-# location /preview {
-# 	alias /dev/shm/mjpeg/cam.jpg;
+# server {
+#         listen 80;
+
+#         root /home/pi/garage-door-control/ui/dist;
+#         index index.html;
+#         server_name localhost;
+
+#         location /preview {
+#                 alias /dev/shm/mjpeg/cam.jpg;
+#         }
 # }
+
+cd /home/pi/garage-door-control/ui
+# copy config/globalConfigs.template to config/globalConfigs.js
+npm install
+gulp

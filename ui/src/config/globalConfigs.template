@@ -1,3 +1,4 @@
 window.globalConfigs = {
-	server: ''
+	server: '',
+	apiPort: 
 };

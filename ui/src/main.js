@@ -17,7 +17,7 @@ var garageOpenData = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYA
 //https://icons8.com/web-app/20156/garage-closed
 var garageClosedData = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAB10lEQVRoQ+2a0U3EMBBE5yqADqADoALoAKgAOqAWOoAOoAOoAKgASoAKDr3IRnsmjhzHUSBaS/dxkr2ZNzu3H+dstJK1WQmH5gQ5lnQl6SKY9SDpXtLrHOa1BjkPwhG/nxH8KQkoPo+toKaCIPY0I/5N0pOkuyD2WtKZpCMj3kI9S+J71aoBQbx13j4Y8QjH7Y+MosMADpiFYrvt1CioUhAejngcjZmPOokHzg+Jz7kcoahLfbuoR13q50z52T8EEsXjHD9cuyge3Rvl3EBu6DQm8UmhGBB0OguVgsRJg0NW/JcRjkutxOe4gIrdB2zPbAQKDTsT0IK8DIjH/SVX7FQf1AnCLMg2KL0NbZxl3jdwg6QQ95tQq2PoAykdAA00TSoRjXeQSTY2POwdaWhmk1KjO5KO5SYqRhZh/F8mZ0aDxAMjn918ezpNq0GWGss7go09DuIdmfhr8WgNToeJ7tYc9454R2pyU3DGo+XRKohJzRaPlkerJjcFZzxaHq2CmNRs8Wh5tGpyU3DGo+XRKohJzZZFo/Uuiau7vsW9S3c5U7gWBeHy8iAjlJvf9E5yiGlRkEKzi7Y5SJFNf2jTr6s3rnx5HeM/Le7duxcYlvo/t7lZqwH5BmPFwjM4vQU4AAAAAElFTkSuQmCC";
 
-var imageSrcUrl = "http://" + window.globalConfigs.server + "/preview";
+var imageSrcUrl = "/preview"; // Live preview requires the nginx configuration outlined in the setup.sh file.
 var apiUrl = "http://" + window.globalConfigs.server + ":" + window.globalConfigs.apiPort + "/garage-door-control/api/v1/";
 
 var Enclosure = React.createClass({
