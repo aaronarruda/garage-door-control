@@ -32,4 +32,4 @@ def toggle():
 	return jsonify("TOGGLED")
 
 if __name__ == '__main__':
-	app.run(host='0.0.0.0', port=10101, debug=True)
+	app.run(host='0.0.0.0', port=10111, debug=True)
