@@ -10,7 +10,7 @@ import time
 app = Flask(__name__)
 
 config = configparser.ConfigParser()
-config.read('properties.ini')
+config.read(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'properties.ini'))
 
 util = GPIOUtils(config)
 util.init()

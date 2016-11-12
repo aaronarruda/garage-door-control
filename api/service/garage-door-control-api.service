@@ -1,0 +1,10 @@
+[Unit]
+Description=Garage Door Control API
+ 
+[Service]
+ExecStart=/usr/bin/python /home/pi/garage-door-control/api/ApiServer.py
+StandardOutput=journal
+ 
+[Install]
+WantedBy=multi-user.target
+Alias=garage-door-control-api.service
