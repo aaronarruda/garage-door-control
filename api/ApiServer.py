@@ -5,7 +5,7 @@ from tornado.log import enable_pretty_logging
 from Api import app
 
 http_server = HTTPServer(WSGIContainer(app))
-http_server.listen(10101)
+http_server.listen(10111)
 enable_pretty_logging()
 print "Garage Door Control API started."
 IOLoop.instance().start()
