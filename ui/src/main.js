@@ -88,7 +88,7 @@ var Enclosure = React.createClass({
 			timeout: 5000,
 			success: function(data) {
 				this.setState({alertApiToggleError: false});
-			},
+			}.bind(this),
 			error: function(xhr, status, err) {
 				this.setState({alertApiToggleError: true});
 			}.bind(this)
