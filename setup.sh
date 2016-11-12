@@ -15,7 +15,9 @@ sudo pip install flask tornado configparser
 # This makes available the live preview outside of the authentication
 # necessary for the RPi-Cam-Web-Interface management interface
 # and runs the garage-door-control interface.  Change the PIi-Cam to run 
-# on port 8080.
+# on port 8080.  This configuration also requires authentication for 
+# out of network access.  Access within the network doesn't require 
+# authentication.
 
 # server {
 #         listen 80;
@@ -23,6 +25,15 @@ sudo pip install flask tornado configparser
 #         root /home/pi/garage-door-control/ui/dist;
 #         index index.html;
 #         server_name localhost;
+
+#		  location / {
+#                 satisfy any;
+#                 allow   <local ip block>/24;
+#                 deny    <router IP>;
+#                 deny    all;
+#                 auth_basic "Garage Access";
+#                 auth_basic_user_file /etc/nginx/.htpasswd;
+#         }
 
 #         location /preview {
 #                 alias /dev/shm/mjpeg/cam.jpg;
