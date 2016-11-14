@@ -75,7 +75,7 @@ var Enclosure = React.createClass({
 				});
 
 			}.bind(this),
-			error: function() {
+			error: function(jqxhr, testStatus, errorThrown) {
 				this.setState({alertApiStatusError: true});
 			}.bind(this)
 		});
