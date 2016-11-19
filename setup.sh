@@ -17,7 +17,8 @@ sudo pip install flask tornado configparser
 # and runs the garage-door-control interface.  Change the PIi-Cam to run 
 # on port 8080.  This configuration also requires authentication for 
 # out of network access.  Access within the network doesn't require 
-# authentication.
+# authentication.  This configuration also allows the API running on a different
+# port to adhere to the Same Origin Policy.
 
 # server {
 #         listen 80;
@@ -33,6 +34,10 @@ sudo pip install flask tornado configparser
 #                 deny    all;
 #                 auth_basic "Garage Access";
 #                 auth_basic_user_file /etc/nginx/.htpasswd;
+#         }
+
+#		  location /garage-door-control/api {
+#                 proxy_pass http://<port of API server>:<API port>;
 #         }
 
 #         location /preview {
