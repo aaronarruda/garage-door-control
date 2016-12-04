@@ -1,18 +1,23 @@
 import threading
+import subprocess
+from subprocess import CalledProcessError
 
-class PeriodicReedSwitchRead(threading.Thread):
+class PeriodicChipTempRead(threading.Thread):
 
-	def __init__(self, interval, gpioUtil):
-		super(PeriodicReedSwitchRead, self).__init__()
+	def __init__(self, interval):
+		super(PeriodicChipTempRead, self).__init__()
 		self.interval = interval
 		self.daemon = True
-		self.gpioUtil = gpioUtil
-		self.openedSwitchState = 0
-		self.closedSwitchState = 0
-		
+		self.temp = 0;
+
 	def run(self):
-		self.openedSwitchState, self.closedSwitchState = self.gpioUtil.readOpenCloseSwitchPins()
+		try:
+			self.temp = subprocess.check_output("/opt/vc/bin/vcgencmd measure_temp", shell=True)
+			self.temp = self.temp.replace("temp=", "").rstrip()
+			# trip temp= from above string
+		except CalledProcessError as e:
+			self.temp = "ERROR"
 		threading.Timer(self.interval, self.run).start()
 
-	def getSwitchState(self):
-		return (self.openedSwitchState, self.closedSwitchState)
+	def getTemp(self):
+		return self.temp
