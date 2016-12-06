@@ -3,7 +3,7 @@ import configparser
 from flask import Flask, jsonify, request, current_app
 from ApiUtils import crossdomain
 from GPIOUtils import GPIOUtils
-from PeriodicTasks import PeriodicChipTempRead
+from PeriodicTasks import PeriodicDebugInfoRead
 from threading import Thread
 import time
 
@@ -15,8 +15,8 @@ config.read(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'properties
 util = GPIOUtils(config)
 util.init()
 
-tempReader = PeriodicChipTempRead(10)
-tempReader.start()
+debugInfoReader = PeriodicDebugInfoRead(10)
+debugInfoReader.start()
 
 @app.route('/garage-door-control/api/v1/status', methods=['GET'])
 @crossdomain(origin='*')
@@ -26,7 +26,8 @@ def status():
 		return jsonify(
 			closedSwitchStatus=closedSwitchStatus, 
 			openedSwitchStatus=openedSwitchStatus, 
-			chipTemp=tempReader.getTemp())
+			chipTemp=debugInfoReader.getTemp(),
+			load=debugInfoReader.getLoad())
 	except TypeError as e:
 		print str(e)
 
