@@ -17,7 +17,8 @@ var config = {
 		js: './src/**/*.js',
 		css: [
       		'node_modules/bootstrap/dist/css/bootstrap.min.css',
-      		'node_modules/bootstrap/dist/css/bootstrap-theme.min.css'
+      		'node_modules/bootstrap/dist/css/bootstrap-theme.min.css',
+      		'node_modules/react-bootstrap-slider/node_modules/bootstrap-slider/dist/css/bootstrap-slider.min.css'
     	],
 		dist: './dist',
 		mainJs: './src/main.js'
