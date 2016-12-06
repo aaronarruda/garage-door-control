@@ -213,6 +213,7 @@ var Enclosure = React.createClass({
 					<h2><small>Debug Info</small></h2>
 					Refresh Rate: {this.state.refreshRate} (ms)<br />
 					Chip Temp: {this.state.statusData.chipTemp}<br />
+					Load Average: {this.state.statusData.load}
 				</div>
 				);
 		}
