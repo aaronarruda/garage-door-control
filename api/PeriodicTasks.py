@@ -17,7 +17,7 @@ class PeriodicDebugInfoRead(threading.Thread):
 			# strip temp= from above string
 			self.temp = self.temp.replace("temp=", "").rstrip()
 
-			self.load = subprocess.check_output("uptime | awk '{print $10, $11, $12}'", shell=True).rstrip()
+			self.load = subprocess.check_output("awk '{print $1, $2, $3}' /proc/loadavg", shell=True).rstrip()
 		except CalledProcessError as e:
 			self.temp = "ERROR"
 		threading.Timer(self.interval, self.run).start()
