@@ -11,7 +11,6 @@ import {Image} from 'react-bootstrap';
 import {PageHeader} from 'react-bootstrap';
 import {Row} from 'react-bootstrap';
 import SettingsModal from './SettingsModal';
-//var SettingsModal = require('./SettingsModal.js');
 import './config/globalConfigs';
 
 // https://icons8.com/web-app/20157/garage-open

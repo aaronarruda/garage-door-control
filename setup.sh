@@ -1,9 +1,11 @@
 sudo apt-get update
 
 sudo apt-get install -y git
-sudo apt-get install -y npm
-sudo npm install gulp -g
-sudo ln -s /usr/bin/nodejs /usr/bin/node
+wget https://nodejs.org/dist/latest-v6.x/node-v6.9.2-linux-armv6l.tar.gz
+tar -xvf node-v6.9.2-linux-armv6l.tar.gz
+# add new node directory to path
+npm install -g create-react-app
+echo "export PATH=$PATH:/home/pi/node-v6.9.2-linux-armv6l/bin" >> .profile
 
 sudo apt-get install python-pip
 sudo pip install flask tornado configparser
@@ -23,7 +25,7 @@ sudo pip install flask tornado configparser
 # server {
 #         listen 80;
 
-#         root /home/pi/garage-door-control/ui/dist;
+#         root /home/pi/garage-door-control/ui/build;
 #         index index.html;
 #         server_name localhost;
 
@@ -48,4 +50,4 @@ sudo pip install flask tornado configparser
 cd /home/pi/garage-door-control/ui
 # copy config/globalConfigs.template to config/globalConfigs.js
 npm install
-gulp
+npm run build
