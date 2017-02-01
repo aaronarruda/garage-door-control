@@ -1,0 +1,35 @@
+version: '2'
+
+services:
+
+  rpicam:
+    container_name: rpicam
+    build: ./rpicam
+    devices:
+      - "/dev/vchiq"
+      - "/dev/vcsm"
+    volumes:
+      - /opt/vc:/opt/vc
+    ports:
+      - "8080:80"
+
+  control-api:
+    container_name: control-api
+    build: ./api
+    privileged: true
+    # The following is need to give access to motherboard sensors (chip temp).
+    devices:
+      - "/dev/vchiq"
+    volumes:
+      - /opt/vc:/opt/vc:ro
+    environment:
+      - LD_LIBRARY_PATH=/opt/vc/lib
+
+  ui:
+    container_name: ui
+    build: ./ui
+    depends_on:
+      - control-api
+      - rpicam
+    ports:
+      - "80:80"

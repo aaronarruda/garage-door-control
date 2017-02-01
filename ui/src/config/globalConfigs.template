@@ -1,4 +1,0 @@
-window.globalConfigs = {
-	server: '',
-	apiPort: ''
-};

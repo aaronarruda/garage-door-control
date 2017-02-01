@@ -7,10 +7,10 @@ node_modules
 coverage
 
 # production
-build
+# build
 
 # misc
 .DS_Store
 .env
 npm-debug.log
-globalConfigs.js
+# globalConfigs.js
