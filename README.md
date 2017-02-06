@@ -69,7 +69,7 @@ Pin18: magnetic sensor representing “open” position
 > Any of these pin values can be changed in the “properties.ini" file in the “api" directory.
 
 - The camera module is connected to the mock security camera casing where the mock camera is placed.  The genie remote is placed in the battery compartment of the mock casing.  A bit of the genie remote board had to be shaved off in addition to shaving some of the mock casing’s battery compartment to allow the genie remote board to fit into the battery compartment.  When finished the upper casing should look similar to the following:
-![build](docs/images/build2.jpg "Wiring of remote, relay, raspberry pi.")
+![build](docs/images/build.jpg "Wiring of remote, relay, raspberry pi.")
 
 
 - The raspberry pi, relay and casing is put together with a hole cut in the rear part of the mock casing to allow the AC power cable to access the power port of the raspberry pi, as well as the raspberry pi’s GPIO pins.  The device is then mounted in a position facing the garage door:
