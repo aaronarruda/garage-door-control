@@ -12,11 +12,14 @@ Garage Door Control is a collection of services providing monitoring and control
 ## Software Setup
 
 #### Requirements
-- Docker compatible Raspbian install.
 - Camera module must be enabled.
+- [Docker](http://blog.alexellis.io/getting-started-with-docker-on-raspberry-pi/)
 - [Docker-Compose (with virtualenv)](https://docs.docker.com/compose/install/#/alternative-install-options)
 
-Assuming Docker-Compose is installed via virtualenv in the directory “docker-compose”:
+Executing the script `system_setup.sh` will install the required system dependencies.
+
+
+Assuming Docker-Compose is installed via the `system_setup.sh` script:
 
 	source docker-compose/bin/active
 
@@ -34,7 +37,7 @@ Start the service:
 	docker-compose start
 
 
-#####This will install:
+##### This will install:
 - [RPi-Cam-Web-Interface](http://elinux.org/RPi-Cam-Web-Interface) for live picture and video preview and motion detection.
 
 		Access the interface on port 8080 (http://<raspberrypi-IP>:8080)
@@ -63,9 +66,9 @@ Start the service:
 ![remote_back](docs/images/remote_back.jpg "Back of remote board, solder points circled.")
 
 - The relay and magnetic sensors connects to the following GPIO pins:
-Pin 3: relay
-Pin 23: magnetic sensor representing “closed” position
-Pin18: magnetic sensor representing “open” position
+	- Pin 3: relay
+	- Pin 23: magnetic sensor representing “closed” position
+	- Pin18: magnetic sensor representing “open” position
 > Any of these pin values can be changed in the “properties.ini" file in the “api" directory.
 
 - The camera module is connected to the mock security camera casing where the mock camera is placed.  The genie remote is placed in the battery compartment of the mock casing.  A bit of the genie remote board had to be shaved off in addition to shaving some of the mock casing’s battery compartment to allow the genie remote board to fit into the battery compartment.  When finished the upper casing should look similar to the following:
