@@ -5,11 +5,14 @@ services:
   rpicam:
     container_name: rpicam
     build: ./rpicam
+    hostname: garage-cam
     devices:
       - "/dev/vchiq"
       - "/dev/vcsm"
     volumes:
+      - /etc/localtime:/etc/localtime:ro
       - /opt/vc:/opt/vc
+      - rpicam-data:/var/www/media
     ports:
       - "8080:80"
 
@@ -21,6 +24,7 @@ services:
     devices:
       - "/dev/vchiq"
     volumes:
+      - /etc/localtime:/etc/localtime:ro
       - /opt/vc:/opt/vc:ro
     environment:
       - LD_LIBRARY_PATH=/opt/vc/lib
@@ -33,3 +37,6 @@ services:
       - rpicam
     ports:
       - "80:80"
+
+volumes:
+  rpicam-data:
