@@ -1,6 +1,5 @@
-FROM droogmic/rpi-cam-web
+FROM droogmic/rpi-cam-web:20170112
 
-COPY preview_nginx.conf /etc/nginx/sites-available/preview
-RUN ln -s /etc/nginx/sites-available/preview /etc/nginx/sites-enabled/.
+COPY rpicam_with_preview_nginx.conf /etc/nginx/sites-available/rpicam
 
 ENTRYPOINT ["rpi-cam-web"]
