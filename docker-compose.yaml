@@ -15,6 +15,7 @@ services:
       - rpicam-data:/var/www/media
     ports:
       - "8080:80"
+    restart: unless-stopped
 
   control-api:
     container_name: control-api
@@ -28,6 +29,7 @@ services:
       - /opt/vc:/opt/vc:ro
     environment:
       - LD_LIBRARY_PATH=/opt/vc/lib
+    restart: unless-stopped
 
   ui:
     container_name: ui
@@ -37,6 +39,7 @@ services:
       - rpicam
     ports:
       - "80:80"
+    restart: unless-stopped
 
 volumes:
   rpicam-data:
